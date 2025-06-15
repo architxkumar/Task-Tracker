@@ -17,7 +17,7 @@ func main() {
 
 	switch command {
 	case "add":
-		commands.Add(argsArray)
+		commands.AddTask(argsArray)
 	case "update":
 		fmt.Printf("%s\n", command)
 	case "delete":

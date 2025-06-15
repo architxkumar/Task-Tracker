@@ -10,11 +10,11 @@ import (
 	"time"
 )
 
-// Add is used to add tasks in .json file.
+// AddTask is used to add tasks in .json file.
 // If the file exists, it reads all the contents from it,
 // then overwrites the file by truncating and then adding
 // the new updated json array to the .json file
-func Add(args []string) {
+func AddTask(args []string) {
 	if len(args) != 1 {
 		log.Fatal("Invalid command usage\n")
 	}
