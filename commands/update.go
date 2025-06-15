@@ -9,6 +9,7 @@ import (
 	"regexp"
 )
 
+// UpdateTaskDescription updates the description of the task with the supplied id
 func UpdateTaskDescription(args []string) {
 	if len(args) != 2 {
 		log.Fatal("Invalid command Usage")
