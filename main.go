@@ -19,7 +19,7 @@ func main() {
 	case "add":
 		commands.AddTask(argsArray)
 	case "update":
-		fmt.Printf("%s\n", command)
+		commands.UpdateTaskDescription(argsArray)
 	case "delete":
 		fmt.Printf("%s\n", command)
 	case "mark-done":
