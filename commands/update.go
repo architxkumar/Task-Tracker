@@ -6,22 +6,11 @@ import (
 	"io"
 	"log"
 	"os"
-	"regexp"
 )
 
 // UpdateTaskDescription updates the description of the task with the supplied id
 func UpdateTaskDescription(args []string) {
-	if len(args) != 2 {
-		log.Fatal("Invalid command Usage")
-	}
-	// Input Validation: The id shouldn't contain alphabets
-	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, args[0])
-	if err != nil {
-		log.Fatal("Unable to valid agrument input")
-	}
-	if characterRegex {
-		log.Fatal("Invalid Task Id")
-	}
+	TaskIdValidator(args)
 	taskId := args[0]
 	description := args[1]
 	// Will be updated in the loop in case the task is present
