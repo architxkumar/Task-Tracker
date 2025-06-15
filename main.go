@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Task-Tracker/commands"
 	"fmt"
 	"os"
 	"strings"
@@ -12,10 +13,11 @@ func main() {
 		os.Exit(1)
 	}
 	command := strings.ToLower(os.Args[1])
+	argsArray := os.Args[2:]
 
 	switch command {
 	case "add":
-		fmt.Printf("%s\n", command)
+		commands.Add(argsArray)
 	case "update":
 		fmt.Printf("%s\n", command)
 	case "delete":
@@ -30,4 +32,5 @@ func main() {
 		fmt.Printf("Invalid command\n")
 		os.Exit(1)
 	}
+	os.Exit(0)
 }
