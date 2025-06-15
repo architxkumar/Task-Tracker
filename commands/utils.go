@@ -6,6 +6,7 @@ import (
 )
 
 func TruncatingAndWriteContents(jsonFile *os.File, output []byte) {
+func TruncateAndWriteContent(jsonFile *os.File, output []byte) {
 	err := jsonFile.Truncate(0)
 	if err != nil {
 		log.Fatal("Unable to truncate json file.", err.Error())
