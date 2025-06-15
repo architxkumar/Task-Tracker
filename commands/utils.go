@@ -5,7 +5,8 @@ import (
 	"os"
 )
 
-func TruncatingAndWriteContents(jsonFile *os.File, output []byte) {
+// TruncateAndWriteContent overwrites the content of the json file with
+// the supplied JsonMarshall bytes and takes in file pointer
 func TruncateAndWriteContent(jsonFile *os.File, output []byte) {
 	err := jsonFile.Truncate(0)
 	if err != nil {
