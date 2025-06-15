@@ -43,18 +43,7 @@ func AddTask(args []string) {
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())
 	}
-	err = jsonFile.Truncate(0)
-	if err != nil {
-		log.Fatal("Unable to truncate json file.", err.Error())
-	}
-	_, err = jsonFile.Seek(0, 0)
-	if err != nil {
-		log.Fatal("Unable to reset pointer location.", err.Error())
-	}
-	_, err = jsonFile.Write(output)
-	if err != nil {
-		log.Fatal("Unable to write to json.", err.Error())
-	}
+	TruncatingAndWriteContents(jsonFile, output)
 	err = jsonFile.Close()
 	if err != nil {
 		log.Fatal("Error closing File.", err.Error())

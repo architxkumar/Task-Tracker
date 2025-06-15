@@ -24,7 +24,9 @@ func UpdateTaskDescription(args []string) {
 	}
 	taskId := args[0]
 	description := args[1]
+	// Will be updated in the loop in case the task is present
 	taskPresent := false
+	// File is opened only O_RDWR mode, as updation should only be performed on already exists file
 	jsonFile, err := os.OpenFile("tasks.json", os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatal("Error opening tasks.json.", err.Error())
@@ -50,18 +52,7 @@ func UpdateTaskDescription(args []string) {
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())
 	}
-	err = jsonFile.Truncate(0)
-	if err != nil {
-		log.Fatal("Unable to truncate json file.", err.Error())
-	}
-	_, err = jsonFile.Seek(0, 0)
-	if err != nil {
-		log.Fatal("Unable to reset pointer location.", err.Error())
-	}
-	_, err = jsonFile.Write(output)
-	if err != nil {
-		log.Fatal("Unable to write to json.", err.Error())
-	}
+	TruncatingAndWriteContents(jsonFile, output)
 	err = jsonFile.Close()
 	if err != nil {
 		log.Fatal("Error closing File.", err.Error())
