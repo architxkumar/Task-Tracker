@@ -9,7 +9,7 @@ import (
 
 // UpdateTaskDescription updates the description of the task with the supplied id
 func UpdateTaskDescription(args []string) {
-	taskIdValidator(args)
+	inputArgumentValidator(args)
 	taskId := args[0]
 	updatedDescription := args[1]
 	// File is opened only O_RDWR mode, as updation should only be performed on already exists file
@@ -28,9 +28,9 @@ func UpdateTaskDescription(args []string) {
 	log.Print("Task Updated Successfully")
 }
 
-// taskIdValidator checks for the validity of the
+// inputArgumentValidator checks for the validity of the
 // program arguments during [UpdateTaskDescription] function usage
-func taskIdValidator(args []string) {
+func inputArgumentValidator(args []string) {
 	if len(args) != 2 {
 		log.Fatal("Invalid command Usage")
 	}
