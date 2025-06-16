@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"os"
-	"regexp"
 )
 
 // UpdateTaskDescription updates the description of the task with the supplied id
@@ -35,11 +34,5 @@ func inputArgumentValidator(args []string) {
 		log.Fatal("Invalid command Usage")
 	}
 	// Input Validation: The id shouldn't contain alphabets
-	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, args[0])
-	if err != nil {
-		log.Fatal("Unable to valid agrument input")
-	}
-	if characterRegex {
-		log.Fatal("Invalid Task Id")
-	}
+	TaskIdValidator(args[1])
 }

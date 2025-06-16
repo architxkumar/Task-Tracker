@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"regexp"
 )
 
 // truncateAndWriteContent overwrites the content of the json file with
@@ -57,4 +58,14 @@ func getTaskIndex(jsonArray []model.Task, taskId string) int {
 		log.Fatal("Task not present in the list with the specific id")
 	}
 	return index
+}
+
+func TaskIdValidator(taskId string) {
+	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, taskId)
+	if err != nil {
+		log.Fatal("Unable to valid agrument input")
+	}
+	if characterRegex {
+		log.Fatal("Invalid Task Id")
+	}
 }
