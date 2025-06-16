@@ -10,14 +10,14 @@ import (
 func UpdateTaskDescription(args []string) {
 	TaskIdValidator(args)
 	taskId := args[0]
-	description := args[1]
+	updatedDescription := args[1]
 	// Will be updated in the loop in case the task is present
 	taskPresent := false
 	// File is opened only O_RDWR mode, as updation should only be performed on already exists file
 	jsonArray, jsonFile := ReadUnmarshallBytesFromFile(os.O_RDWR)
 	for i, e := range jsonArray {
 		if e.Id == taskId {
-			jsonArray[i].Description = description
+			jsonArray[i].Description = updatedDescription
 			taskPresent = true
 		}
 	}
