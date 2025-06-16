@@ -60,3 +60,18 @@ func ReadUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
 	}
 	return jsonObjects, jsonFile
 }
+
+// GetTaskIndex returns the index of task from the array,
+// if present
+func GetTaskIndex(jsonArray []model.Task, taskId string) int {
+	index := -1
+	for i, e := range jsonArray {
+		if e.Id == taskId {
+			index = i
+		}
+	}
+	if index < 0 {
+		log.Fatal("Task not present in the list with the specific id")
+	}
+	return index
+}
