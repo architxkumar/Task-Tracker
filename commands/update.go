@@ -1,9 +1,7 @@
 package commands
 
 import (
-	"Task-Tracker/model"
 	"encoding/json"
-	"io"
 	"log"
 	"os"
 )
@@ -16,18 +14,7 @@ func UpdateTaskDescription(args []string) {
 	// Will be updated in the loop in case the task is present
 	taskPresent := false
 	// File is opened only O_RDWR mode, as updation should only be performed on already exists file
-	jsonFile, err := os.OpenFile("tasks.json", os.O_RDWR, 0644)
-	if err != nil {
-		log.Fatal("Error opening tasks.json.", err.Error())
-	}
-	content, err := io.ReadAll(jsonFile)
-	if err != nil {
-		log.Fatal("Error reading contents from tasks.json.", err.Error())
-	}
-	var jsonArray []model.Task
-	if err = json.Unmarshal(content, &jsonArray); err != nil {
-		log.Fatal("Error decoding contents from tasks.json", err.Error())
-	}
+	jsonArray, jsonFile := ReadUnmarshallBytesFromFile(os.O_RDWR)
 	for i, e := range jsonArray {
 		if e.Id == taskId {
 			jsonArray[i].Description = description

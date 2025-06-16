@@ -3,7 +3,6 @@ package commands
 import (
 	"Task-Tracker/model"
 	"encoding/json"
-	"io"
 	"log"
 	"os"
 	"strconv"
@@ -23,22 +22,7 @@ func AddTask(args []string) {
 	// TODO: create status enum with three possible values: Todo, in-progress, done
 	status := "todo"
 	task := model.Task{Id: strconv.FormatInt(time.Now().UnixNano(), 10), Status: status, Description: description, CreationTime: time.Now(), UpdationTime: time.Now()}
-	jsonFile, err := os.OpenFile("tasks.json", os.O_RDWR|os.O_CREATE, 0644)
-	if err != nil {
-		log.Fatal("Error opening or creating tasks.json.", err.Error())
-	}
-	content, err := io.ReadAll(jsonFile)
-	if err != nil {
-		log.Fatal("Error reading contents from tasks.json.", err.Error())
-	}
-	var jsonArray []model.Task
-	if len(content) != 0 {
-		err = json.Unmarshal(content, &jsonArray)
-		if err != nil {
-			log.Fatal("Error parsing contents from tasks.json.", err.Error())
-		}
-	}
-
+	jsonArray, jsonFile := ReadUnmarshallBytesFromFile(os.O_RDWR | os.O_CREATE)
 	jsonArray = append(jsonArray, task)
 	output, err := json.Marshal(jsonArray)
 	if err != nil {

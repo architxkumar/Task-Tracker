@@ -1,6 +1,9 @@
 package commands
 
 import (
+	"Task-Tracker/model"
+	"encoding/json"
+	"io"
 	"log"
 	"os"
 	"regexp"
@@ -37,4 +40,23 @@ func TaskIdValidator(args []string) {
 	if characterRegex {
 		log.Fatal("Invalid Task Id")
 	}
+}
+
+func ReadUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
+	jsonFile, err := os.OpenFile("tasks.json", flag, 0644)
+	if err != nil {
+		log.Fatal("Error opening or creating tasks.json.", err.Error())
+	}
+	content, err := io.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal("Error reading contents from tasks.json.", err.Error())
+	}
+	var jsonObjects []model.Task
+	if len(content) != 0 {
+		err = json.Unmarshal(content, &jsonObjects)
+		if err != nil {
+			log.Fatal("Error parsing contents from tasks.json.", err.Error())
+		}
+	}
+	return jsonObjects, jsonFile
 }
