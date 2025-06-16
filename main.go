@@ -23,9 +23,9 @@ func main() {
 	case "delete":
 		commands.DeleteTask(argsArray)
 	case "mark-done":
-		fmt.Printf("%s\n", command)
+		commands.UpdateTaskProgress(argsArray, "done")
 	case "mark-in-progress":
-		fmt.Printf("%s\n", command)
+		commands.UpdateTaskProgress(argsArray, "in-progress")
 	case "list":
 		fmt.Printf("%s\n", command)
 	default:

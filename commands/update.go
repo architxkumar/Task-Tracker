@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"time"
 )
 
 // UpdateTaskDescription updates the description of the task with the supplied id
@@ -15,6 +16,7 @@ func UpdateTaskDescription(args []string) {
 	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR)
 	index := getTaskIndex(jsonArray, taskId)
 	jsonArray[index].Description = updatedDescription
+	jsonArray[index].UpdationTime = time.Now()
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())
@@ -35,4 +37,22 @@ func inputArgumentValidator(args []string) {
 	}
 	// Input Validation: The id shouldn't contain alphabets
 	TaskIdValidator(args[1])
+}
+
+func UpdateTaskProgress(args []string, status string) {
+	if len(args) != 1 {
+		log.Fatal("Invalid command Usage")
+	}
+	TaskIdValidator(args[0])
+	taskId := args[0]
+	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR)
+	index := getTaskIndex(jsonArray, taskId)
+	jsonArray[index].Status = status
+	jsonArray[index].UpdationTime = time.Now()
+	output, err := json.Marshal(jsonArray)
+	if err != nil {
+		log.Fatal("Unable to marshall to json", err.Error())
+	}
+	truncateAndWriteContent(jsonFile, output)
+	log.Print("Task Status updated successfully")
 }
