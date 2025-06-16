@@ -22,13 +22,13 @@ func AddTask(args []string) {
 	// TODO: create status enum with three possible values: Todo, in-progress, done
 	status := "todo"
 	task := model.Task{Id: strconv.FormatInt(time.Now().UnixNano(), 10), Status: status, Description: description, CreationTime: time.Now(), UpdationTime: time.Now()}
-	jsonArray, jsonFile := ReadUnmarshallBytesFromFile(os.O_RDWR | os.O_CREATE)
+	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR | os.O_CREATE)
 	jsonArray = append(jsonArray, task)
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())
 	}
-	TruncateAndWriteContent(jsonFile, output)
+	truncateAndWriteContent(jsonFile, output)
 	err = jsonFile.Close()
 	if err != nil {
 		log.Fatal("Error closing File.", err.Error())

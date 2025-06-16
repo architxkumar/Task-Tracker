@@ -8,9 +8,9 @@ import (
 	"os"
 )
 
-// TruncateAndWriteContent overwrites the content of the json file with
+// truncateAndWriteContent overwrites the content of the json file with
 // the supplied JsonMarshall bytes and takes in file pointer
-func TruncateAndWriteContent(jsonFile *os.File, output []byte) {
+func truncateAndWriteContent(jsonFile *os.File, output []byte) {
 	err := jsonFile.Truncate(0)
 	if err != nil {
 		log.Fatal("Unable to truncate json file.", err.Error())
@@ -25,7 +25,7 @@ func TruncateAndWriteContent(jsonFile *os.File, output []byte) {
 	}
 }
 
-func ReadUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
+func readUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
 	jsonFile, err := os.OpenFile("tasks.json", flag, 0644)
 	if err != nil {
 		log.Fatal("Error opening or creating tasks.json.", err.Error())
@@ -44,9 +44,9 @@ func ReadUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
 	return jsonObjects, jsonFile
 }
 
-// GetTaskIndex returns the index of task from the array,
+// getTaskIndex returns the index of task from the array,
 // if present
-func GetTaskIndex(jsonArray []model.Task, taskId string) int {
+func getTaskIndex(jsonArray []model.Task, taskId string) int {
 	index := -1
 	for i, e := range jsonArray {
 		if e.Id == taskId {
