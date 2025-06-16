@@ -31,15 +31,16 @@ func AddTask(args []string) {
 	if err != nil {
 		log.Fatal("Error reading contents from tasks.json.", err.Error())
 	}
-	var jsonObjects []model.Task
+	var jsonArray []model.Task
 	if len(content) != 0 {
-		err = json.Unmarshal(content, &jsonObjects)
+		err = json.Unmarshal(content, &jsonArray)
 		if err != nil {
 			log.Fatal("Error parsing contents from tasks.json.", err.Error())
 		}
 	}
-	jsonObjects = append(jsonObjects, task)
-	output, err := json.Marshal(jsonObjects)
+
+	jsonArray = append(jsonArray, task)
+	output, err := json.Marshal(jsonArray)
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())
 	}
