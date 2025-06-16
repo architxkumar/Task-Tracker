@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"regexp"
 )
 
 // UpdateTaskDescription updates the description of the task with the supplied id
 func UpdateTaskDescription(args []string) {
-	TaskIdValidator(args)
+	taskIdValidator(args)
 	taskId := args[0]
 	updatedDescription := args[1]
 	// File is opened only O_RDWR mode, as updation should only be performed on already exists file
@@ -25,4 +26,20 @@ func UpdateTaskDescription(args []string) {
 		log.Fatal("Error closing File.", err.Error())
 	}
 	log.Print("Task Updated Successfully")
+}
+
+// taskIdValidator checks for the validity of the
+// program arguments during [UpdateTaskDescription] function usage
+func taskIdValidator(args []string) {
+	if len(args) != 2 {
+		log.Fatal("Invalid command Usage")
+	}
+	// Input Validation: The id shouldn't contain alphabets
+	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, args[0])
+	if err != nil {
+		log.Fatal("Unable to valid agrument input")
+	}
+	if characterRegex {
+		log.Fatal("Invalid Task Id")
+	}
 }
