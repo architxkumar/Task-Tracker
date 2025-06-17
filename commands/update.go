@@ -16,7 +16,7 @@ func UpdateTaskDescription(args []string) {
 	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR)
 	index := getTaskIndex(jsonArray, taskId)
 	jsonArray[index].Description = updatedDescription
-	jsonArray[index].UpdationTime = time.Now()
+	jsonArray[index].UpdatingTime = time.Now()
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())
@@ -48,7 +48,7 @@ func UpdateTaskProgress(args []string, status string) {
 	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR)
 	index := getTaskIndex(jsonArray, taskId)
 	jsonArray[index].Status = status
-	jsonArray[index].UpdationTime = time.Now()
+	jsonArray[index].UpdatingTime = time.Now()
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
 		log.Fatal("Unable to marshall to json", err.Error())

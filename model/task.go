@@ -7,5 +7,5 @@ type Task struct {
 	Description  string    `json:"description"`
 	Status       string    `json:"status"`
 	CreationTime time.Time `json:"createdAt"`
-	UpdationTime time.Time `json:"updatedAt"`
+	UpdatingTime time.Time `json:"updatedAt"`
 }

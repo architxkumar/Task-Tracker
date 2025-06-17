@@ -53,7 +53,7 @@ func printTask(task model.Task) {
 	fmt.Println("description:	\t", task.Description)
 	fmt.Println("status:		\t", task.Status)
 	fmt.Println("creation date:	\t", task.CreationTime)
-	fmt.Println("updated date:	\t", task.UpdationTime)
+	fmt.Println("updated date:	\t", task.UpdatingTime)
 	fmt.Println("--------------------------------")
 	fmt.Printf("\n\n\n")
 }

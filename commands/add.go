@@ -21,7 +21,7 @@ func AddTask(args []string) {
 	// HACK: using hardcoded string instead of typed enum
 	// TODO: create status enum with three possible values: Todo, in-progress, done
 	status := "todo"
-	task := model.Task{Id: strconv.FormatInt(time.Now().UnixNano(), 10), Status: status, Description: description, CreationTime: time.Now(), UpdationTime: time.Now()}
+	task := model.Task{Id: strconv.FormatInt(time.Now().UnixNano(), 10), Status: status, Description: description, CreationTime: time.Now(), UpdatingTime: time.Now()}
 	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR | os.O_CREATE)
 	jsonArray = append(jsonArray, task)
 	output, err := json.Marshal(jsonArray)
