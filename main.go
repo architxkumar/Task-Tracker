@@ -13,6 +13,11 @@ func main() {
 	}
 	command := strings.ToLower(os.Args[1])
 	argsArray := os.Args[2:]
+	if len(argsArray) != 0 {
+		for i := range argsArray {
+			argsArray[i] = strings.ToLower(argsArray[i])
+		}
+	}
 
 	switch command {
 	case "add":
