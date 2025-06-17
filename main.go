@@ -27,7 +27,7 @@ func main() {
 	case "mark-in-progress":
 		commands.UpdateTaskProgress(argsArray, "in-progress")
 	case "list":
-		fmt.Printf("%s\n", command)
+		commands.ViewTask(argsArray)
 	default:
 		fmt.Printf("Invalid command\n")
 		os.Exit(1)
