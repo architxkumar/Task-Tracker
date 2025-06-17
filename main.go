@@ -2,15 +2,14 @@ package main
 
 import (
 	"Task-Tracker/commands"
-	"fmt"
+	"log"
 	"os"
 	"strings"
 )
 
 func main() {
 	if len(os.Args) == 1 {
-		fmt.Printf("Arguments not supplied\n")
-		os.Exit(1)
+		log.Fatal("Arguments not provided")
 	}
 	command := strings.ToLower(os.Args[1])
 	argsArray := os.Args[2:]
@@ -29,8 +28,6 @@ func main() {
 	case "list":
 		commands.ViewTask(argsArray)
 	default:
-		fmt.Printf("Invalid command\n")
-		os.Exit(1)
+		log.Fatal("Invalid command")
 	}
-	os.Exit(0)
 }
