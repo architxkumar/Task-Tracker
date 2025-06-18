@@ -10,9 +10,9 @@ import (
 )
 
 // AddTask is used to add tasks in .json file.
-// If the file exists, it reads all the contents from it,
-// then overwrites the file by truncating and then adding
-// the new updated json array to the .json file
+// If the file exists, it reads the contents from the file,
+// creates new json array with latest task and then overwrites
+// the file content else, new file is created and contents are directly written.
 func AddTask(args []string) {
 	if len(args) != 1 {
 		log.Fatal("Invalid command usage\n")
@@ -21,7 +21,9 @@ func AddTask(args []string) {
 	// HACK: using hardcoded string instead of typed enum
 	// TODO: create status enum with three possible values: Todo, in-progress, done
 	status := "todo"
-	task := model.Task{Id: strconv.FormatInt(time.Now().UnixNano(), 10), Status: status, Description: description, CreationTime: time.Now(), UpdatingTime: time.Now()}
+	// HACK: task id uses UNIX timestamp in nanoseconds in order to ensure unique id generation
+	task := model.Task{Id: strconv.FormatInt(time.Now().UnixNano(), 10), Status: status,
+		Description: description, CreationTime: time.Now(), UpdatingTime: time.Now()}
 	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR | os.O_CREATE)
 	jsonArray = append(jsonArray, task)
 	output, err := json.Marshal(jsonArray)

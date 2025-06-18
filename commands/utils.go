@@ -26,6 +26,9 @@ func truncateAndWriteContent(jsonFile *os.File, output []byte) {
 	}
 }
 
+// readUnmarshallBytesFromFile opens the tasks.json in the specific mode
+// supplied with the flag argument, reads the contents, unmarshal them into task model
+// and then returns it along with file pointer.
 func readUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
 	jsonFile, err := os.OpenFile("tasks.json", flag, 0644)
 	if err != nil {
