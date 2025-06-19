@@ -12,7 +12,7 @@ func UpdateTaskDescription(args []string) {
 	inputArgumentValidator(args)
 	taskId := args[0]
 	updatedDescription := args[1]
-	// File is opened only O_RDWR mode, as updation should only be performed on already exists file
+	// File is opened only O_RDWR mode, as updating contents should only be performed on already existing file.
 	jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDWR)
 	index := getTaskIndex(jsonArray, taskId)
 	jsonArray[index].Description = updatedDescription
@@ -30,10 +30,11 @@ func UpdateTaskDescription(args []string) {
 }
 
 // inputArgumentValidator checks for the validity of the
-// program arguments during [UpdateTaskDescription] function usage
+// program arguments during UpdateTaskDescription function usage.
+// It checks for valid number of supplied arguments and valid task id
 func inputArgumentValidator(args []string) {
 	if len(args) != 2 {
-		log.Fatal("Invalid command Usage")
+		log.Fatal("Invalid command usage: <task-id> <description>")
 	}
 	// Input Validation: The id shouldn't contain alphabets
 	TaskIdValidator(args[1])
