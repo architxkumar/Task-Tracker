@@ -49,7 +49,7 @@ func readUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
 }
 
 // getTaskIndex returns the index of task from the array,
-// if present
+// if present else will exit the code with "Task not present" message.
 func getTaskIndex(jsonArray []model.Task, taskId string) int {
 	index := -1
 	for i, e := range jsonArray {
@@ -63,12 +63,14 @@ func getTaskIndex(jsonArray []model.Task, taskId string) int {
 	return index
 }
 
+// TaskIdValidator checks the supplied id against regex pattern for alphabets.
+// It ensures task id doesn't contain characters.
 func TaskIdValidator(taskId string) {
 	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, taskId)
 	if err != nil {
-		log.Fatal("Unable to valid agrument input")
+		log.Fatal("Unable to validate task id")
 	}
 	if characterRegex {
-		log.Fatal("Invalid Task Id")
+		log.Fatal("Invalid command Usage: Invalid Task Id")
 	}
 }
