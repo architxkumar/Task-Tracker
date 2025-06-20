@@ -14,7 +14,7 @@ func ViewTask(args []string) {
 	} else if len(args) == 1 {
 		status = args[0]
 	} else {
-		log.Fatal("Invalid number of arguments\n")
+		log.Fatal("Invalid number of arguments.\n")
 	}
 	if status == "all" || status == "done" || status == "todo" || status == "in-progress" {
 		jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDONLY)
@@ -25,10 +25,10 @@ func ViewTask(args []string) {
 		iteratingAndPrintingTask(status, jsonArray)
 		err := jsonFile.Close()
 		if err != nil {
-			log.Fatal("Unable to close file: ", err)
+			log.Fatal("Unable to close file.\n", err.Error())
 		}
 	} else {
-		log.Fatal("Invalid arguments\n")
+		log.Fatal("Invalid arguments.\n")
 	}
 }
 

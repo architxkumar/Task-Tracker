@@ -9,7 +9,7 @@ import (
 
 func main() {
 	if len(os.Args) == 1 {
-		log.Fatal("Arguments not provided")
+		log.Fatal("Arguments not provided\n")
 	}
 	command := strings.ToLower(os.Args[1])
 	argsArray := os.Args[2:]

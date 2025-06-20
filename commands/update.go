@@ -19,14 +19,14 @@ func UpdateTaskDescription(args []string) {
 	jsonArray[index].UpdatingTime = time.Now()
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
-		log.Fatal("Unable to marshall to json", err.Error())
+		log.Fatal("Unable to marshall to json.\n", err.Error())
 	}
 	truncateAndWriteContent(jsonFile, output)
 	err = jsonFile.Close()
 	if err != nil {
-		log.Fatal("Error closing File.", err.Error())
+		log.Fatal("Error closing File.\n", err.Error())
 	}
-	log.Print("Task Updated Successfully")
+	log.Print("Task Updated Successfully.\n")
 }
 
 // inputArgumentValidator checks for the validity of the
@@ -34,7 +34,7 @@ func UpdateTaskDescription(args []string) {
 // It checks for valid number of supplied arguments and valid task id
 func inputArgumentValidator(args []string) {
 	if len(args) != 2 {
-		log.Fatal("Invalid command usage: <task-id> <description>")
+		log.Fatal("Invalid command usage: <task-id> <description>.\n")
 	}
 	// Input Validation: The id shouldn't contain alphabets
 	TaskIdValidator(args[1])
@@ -42,7 +42,7 @@ func inputArgumentValidator(args []string) {
 
 func UpdateTaskProgress(args []string, status string) {
 	if len(args) != 1 {
-		log.Fatal("Invalid command Usage")
+		log.Fatal("Invalid command Usage.\n")
 	}
 	TaskIdValidator(args[0])
 	taskId := args[0]
@@ -52,8 +52,8 @@ func UpdateTaskProgress(args []string, status string) {
 	jsonArray[index].UpdatingTime = time.Now()
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
-		log.Fatal("Unable to marshall to json", err.Error())
+		log.Fatal("Unable to marshall to json.\n", err.Error())
 	}
 	truncateAndWriteContent(jsonFile, output)
-	log.Print("Task Status updated successfully")
+	log.Print("Task Status updated successfully.\n")
 }

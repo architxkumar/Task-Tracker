@@ -14,15 +14,15 @@ import (
 func truncateAndWriteContent(jsonFile *os.File, output []byte) {
 	err := jsonFile.Truncate(0)
 	if err != nil {
-		log.Fatal("Unable to truncate json file.", err.Error())
+		log.Fatal("Unable to truncate json file.\n", err.Error())
 	}
 	_, err = jsonFile.Seek(0, 0)
 	if err != nil {
-		log.Fatal("Unable to reset pointer location.", err.Error())
+		log.Fatal("Unable to reset pointer location.\n", err.Error())
 	}
 	_, err = jsonFile.Write(output)
 	if err != nil {
-		log.Fatal("Unable to write to json.", err.Error())
+		log.Fatal("Unable to write to json.\n", err.Error())
 	}
 }
 
@@ -32,17 +32,17 @@ func truncateAndWriteContent(jsonFile *os.File, output []byte) {
 func readUnmarshallBytesFromFile(flag int) ([]model.Task, *os.File) {
 	jsonFile, err := os.OpenFile("tasks.json", flag, 0644)
 	if err != nil {
-		log.Fatal("Error opening or creating tasks.json.", err.Error())
+		log.Fatal("Error opening or creating tasks.json.\n", err.Error())
 	}
 	content, err := io.ReadAll(jsonFile)
 	if err != nil {
-		log.Fatal("Error reading contents from tasks.json.", err.Error())
+		log.Fatal("Error reading contents from tasks.json.\n", err.Error())
 	}
 	var jsonObjects []model.Task
 	if len(content) != 0 {
 		err = json.Unmarshal(content, &jsonObjects)
 		if err != nil {
-			log.Fatal("Error parsing contents from tasks.json.", err.Error())
+			log.Fatal("Error parsing contents from tasks.json.\n", err.Error())
 		}
 	}
 	return jsonObjects, jsonFile
@@ -58,7 +58,7 @@ func getTaskIndex(jsonArray []model.Task, taskId string) int {
 		}
 	}
 	if index < 0 {
-		log.Fatal("Task not present in the list with the specific id")
+		log.Fatal("Task not present in the list with the specific id\n")
 	}
 	return index
 }
@@ -68,9 +68,9 @@ func getTaskIndex(jsonArray []model.Task, taskId string) int {
 func TaskIdValidator(taskId string) {
 	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, taskId)
 	if err != nil {
-		log.Fatal("Unable to validate task id")
+		log.Fatal("Error validating task id.\n", err.Error())
 	}
 	if characterRegex {
-		log.Fatal("Invalid command Usage: Invalid Task Id")
+		log.Fatal("Invalid command Usage: Invalid task id.\n")
 	}
 }

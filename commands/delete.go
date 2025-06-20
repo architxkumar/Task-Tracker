@@ -8,7 +8,7 @@ import (
 
 func DeleteTask(args []string) {
 	if len(args) != 1 {
-		log.Fatal("Invalid Arguments")
+		log.Fatal("Invalid command usage: Invalid number of arguments.\n")
 	}
 	TaskIdValidator(args[0])
 	taskId := args[0]
@@ -17,8 +17,8 @@ func DeleteTask(args []string) {
 	jsonArray = append(jsonArray[:taskIndex], jsonArray[taskIndex+1:]...)
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
-		log.Fatal("Unable to marshall to json", err.Error())
+		log.Fatal("Unable to marshall to json.\n", err.Error())
 	}
 	truncateAndWriteContent(jsonFile, output)
-	log.Print("Task Deleted Successfully")
+	log.Print("Task Deleted Successfully.\n")
 }

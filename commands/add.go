@@ -15,7 +15,7 @@ import (
 // the file content else, new file is created and contents are directly written.
 func AddTask(args []string) {
 	if len(args) != 1 {
-		log.Fatal("Invalid command usage\n")
+		log.Fatal("Invalid command usage.\n")
 	}
 	description := args[0]
 	// HACK: using hardcoded string instead of typed enum
@@ -28,12 +28,12 @@ func AddTask(args []string) {
 	jsonArray = append(jsonArray, task)
 	output, err := json.Marshal(jsonArray)
 	if err != nil {
-		log.Fatal("Unable to marshall to json", err.Error())
+		log.Fatal("Unable to marshall to json.\n", err.Error())
 	}
 	truncateAndWriteContent(jsonFile, output)
 	err = jsonFile.Close()
 	if err != nil {
-		log.Fatal("Error closing File.", err.Error())
+		log.Fatal("Error closing File.\n", err.Error())
 	}
 	log.Print("Task successfully created")
 }
