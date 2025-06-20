@@ -6,6 +6,11 @@ import (
 	"os"
 )
 
+// DeleteTask removes the task from "tasks.json"
+// by supplying the associate task id if present, else
+// it exists with an error. It does by reading the contents
+// into array of tasks model, removing the task from the array
+// and then overwriting the array contents into the file.
 func DeleteTask(args []string) {
 	if len(args) != 1 {
 		log.Fatal("Invalid command usage: Invalid number of arguments.\n")
