@@ -63,8 +63,8 @@ func getTaskIndex(jsonArray []model.Task, taskId string) int {
 	return index
 }
 
-// TaskIdValidator checks the supplied id against regex pattern for alphabets.
-// It ensures task id doesn't contain characters.
+// TaskIdValidator validates the supplied task id against presence of alphabets.
+// It uses regex pattern matching for identification of alphabets
 func TaskIdValidator(taskId string) {
 	characterRegex, err := regexp.MatchString(`^[a-zA-Z]+$`, taskId)
 	if err != nil {

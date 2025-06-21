@@ -40,6 +40,11 @@ func inputArgumentValidator(args []string) {
 	TaskIdValidator(args[1])
 }
 
+// UpdateTaskProgress updates the status of the task
+// in "tasks.json" with the supplied status.
+// It reads the file content into array of task model,
+// updates the status of the task with the supplied id
+// and then overwrites the file content with the updated data.
 func UpdateTaskProgress(args []string, status string) {
 	if len(args) != 1 {
 		log.Fatal("Invalid command Usage.\n")
