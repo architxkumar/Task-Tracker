@@ -7,6 +7,20 @@ import (
 	"os"
 )
 
+// ViewTask filters and prints task from JSON file based on their task status.
+//
+// Possible arguments:
+//
+// "all" - Shows all the tasks
+//
+// "done" - Shows completed tasks
+//
+// "todo" - Shows pending tasks
+//
+// "in-progress" - Shows tasks in progress
+//
+// If no arguments are provided then defaults to "all".
+// Panics on invalid arguments or file operation failures.
 func ViewTask(args []string) {
 	var status string
 	if len(args) == 0 {
@@ -35,6 +49,8 @@ func ViewTask(args []string) {
 	}
 }
 
+// iteratingAndPrintingTask iterates over each task and prints its detail using printTask
+// for formatted output.
 func iteratingAndPrintingTask(taskStatus string, jsonArray []model.Task) {
 	if taskStatus == "all" {
 		for _, task := range jsonArray {
@@ -49,6 +65,8 @@ func iteratingAndPrintingTask(taskStatus string, jsonArray []model.Task) {
 	}
 }
 
+// printTask prints the details of a task in formatted layout.
+// It prints the task id, description, status, creation date and updated date
 func printTask(task model.Task) {
 	fmt.Printf("\n\n\n")
 	fmt.Println("--------------------------------")
