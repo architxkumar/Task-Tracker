@@ -18,15 +18,18 @@ func ViewTask(args []string) {
 	}
 	if status == "all" || status == "done" || status == "todo" || status == "in-progress" {
 		jsonArray, jsonFile := readUnmarshallBytesFromFile(os.O_RDONLY)
+		defer func() {
+			err := jsonFile.Close()
+			if err != nil {
+				log.Fatal("Unable to close file.\n", err.Error())
+			}
+		}()
 		if len(jsonArray) == 0 {
 			print("No tasks found\n")
-			os.Exit(0)
+			return
 		}
 		iteratingAndPrintingTask(status, jsonArray)
-		err := jsonFile.Close()
-		if err != nil {
-			log.Fatal("Unable to close file.\n", err.Error())
-		}
+
 	} else {
 		log.Fatal("Invalid arguments.\n")
 	}
