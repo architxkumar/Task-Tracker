@@ -1,14 +1,33 @@
 # Task Tracker
 
-Task tracker is a project used to track and manage your tasks.
-This CLI based application accepts user action and inputs as arguments,
-and store the tasks in JSON file.
+Task Tracker is a CLI based application to manage your tasks, built as part of [roadmap.sh](https://roadmap.sh/projects/task-tracker) challenge.
 
-## Features
+## How to run
 
-- Add, Update, and Delete tasks
-- Mark a task as in progress or done
-- List all tasks
-- List all tasks that are done
-- List all tasks that are not done
-- List all tasks that are in progress
+Clone the repository and run the following command:
+```bash
+git clone https://github.com/architxkumar/Task-Tracker
+cd Task-Tracker
+```
+
+Run the following command to build and run the project:
+```bash
+go build -o task-cli
+# Adding a new task
+./task-cli add "Buy groceries"
+# Updating and deleting tasks
+./task-cli update 1 "Buy groceries and cook dinner"
+./task-cli delete 1
+
+# Marking a task as in progress or done
+./task-cli mark-in-progress 1
+./task-cli mark-done 1
+
+# Listing all tasks
+./task-cli list
+
+# Listing tasks by status
+./task-cli list done
+./task-cli list todo
+./task-cli list in-progress
+```
